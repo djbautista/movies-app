@@ -1,24 +1,49 @@
-import { useQuery } from '@tanstack/react-query';
-
-import { PaginatedPage, Queries, fetchQuery } from '@/hooks/api/base';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { PaginatedPage, Queries } from '@/hooks/api/base';
 import { Movie } from '@/models/Movie';
+import Axios, { AxiosResponse } from 'axios';
+import { useCallback, useRef } from 'react';
 
-interface UsePopularMoviesProps {
-  page?: number;
-}
+const fetchPopularMovies = async ({ pageParam }: { pageParam: number }) => {
+  const response = (await Axios({
+    url: `/api/movies/popular?page=${pageParam}`,
+  })) as AxiosResponse<PaginatedPage<Movie>>;
 
-export const usePopularMovies = ({ page = 1 }: UsePopularMoviesProps = {}) => {
-  const params = new URLSearchParams({ page: page.toString() });
+  return response.data;
+};
 
-  const query = useQuery({
-    queryKey: [Queries.PopularMovies, page],
-    queryFn: fetchQuery<PaginatedPage<Movie>>({
-      url: '/api/movies/popular',
-      method: 'GET',
-      params,
-    }),
-    select: (data) => data.results,
+export const usePopularMovies = () => {
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  const query = useInfiniteQuery({
+    queryKey: [Queries.PopularMovies],
+    queryFn: fetchPopularMovies,
+    initialPageParam: 1,
+    getNextPageParam: ({ page, total_pages }) =>
+      page < total_pages ? page + 1 : undefined,
   });
 
-  return { ...query, popularMovies: query.data ?? [] };
+  const { data, isLoading, isFetching, hasNextPage, fetchNextPage } = query;
+
+  const popularMovies = data?.pages.flatMap((page) => page.results) ?? [];
+
+  const lastMovieElementRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (query.isLoading || query.isFetching) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [fetchNextPage, hasNextPage, isLoading, isFetching],
+  );
+
+  return {
+    popularMovies,
+    lastMovieElementRef,
+    ...query,
+  };
 };

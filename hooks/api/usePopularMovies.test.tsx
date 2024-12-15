@@ -10,14 +10,16 @@ const mockPopularMovies = [
 ];
 
 const mocks = vi.hoisted(() => ({
-  fetchQuery: vi.fn(
-    () => () => Promise.resolve({ results: mockPopularMovies }),
+  Axios: vi.fn(() =>
+    Promise.resolve({
+      data: { results: mockPopularMovies, page: 1, total_pages: 2 },
+    }),
   ),
 }));
 
-vi.mock('@/hooks/api/base', async (actual) => ({
+vi.mock('axios', async (actual) => ({
   ...((await actual()) as any),
-  fetchQuery: mocks.fetchQuery,
+  default: mocks.Axios,
 }));
 
 const createWrapper = () => {
@@ -34,7 +36,7 @@ describe('usePopularMovies', () => {
   });
 
   test('should return an empty array initially', () => {
-    const { result } = renderHook(() => usePopularMovies({}), {
+    const { result } = renderHook(() => usePopularMovies(), {
       wrapper: createWrapper(),
     });
 
@@ -42,44 +44,55 @@ describe('usePopularMovies', () => {
   });
 
   test('should fetch popular movies data', async () => {
-    const { result } = renderHook(() => usePopularMovies({}), {
+    const { result } = renderHook(() => usePopularMovies(), {
       wrapper: createWrapper(),
     });
 
+    await waitFor(() => !result.current.isLoading);
     await waitFor(() => result.current.isSuccess);
 
     expect(result.current.popularMovies).toEqual(mockPopularMovies);
   });
 
-  test('should call fetchQuery properly with default page', async () => {
-    const { result } = renderHook(() => usePopularMovies({}), {
+  test('should call Axios properly with default page', async () => {
+    const { result } = renderHook(() => usePopularMovies(), {
       wrapper: createWrapper(),
     });
 
+    await waitFor(() => !result.current.isLoading);
     await waitFor(() => result.current.isSuccess);
 
-    expect(mocks.fetchQuery).toHaveBeenCalledWith({
-      url: '/api/movies/popular',
-      method: 'GET',
-      params: new URLSearchParams('page=1'),
+    expect(mocks.Axios).toHaveBeenCalledWith({
+      url: '/api/movies/popular?page=1',
     });
   });
 
-  test('should call fetchQuery properly with custom page', async () => {
-    const customPage = 3;
-    const { result } = renderHook(
-      () => usePopularMovies({ page: customPage }),
-      {
-        wrapper: createWrapper(),
-      },
-    );
+  test('should has next page', async () => {
+    const { result } = renderHook(() => usePopularMovies(), {
+      wrapper: createWrapper(),
+    });
 
+    await waitFor(() => !result.current.isLoading);
     await waitFor(() => result.current.isSuccess);
 
-    expect(mocks.fetchQuery).toHaveBeenCalledWith({
-      url: '/api/movies/popular',
-      method: 'GET',
-      params: new URLSearchParams(`page=${customPage}`),
+    expect(result.current.hasNextPage).toBe(true);
+  });
+
+  test('should call Axios properly with next page', async () => {
+    const { result } = renderHook(() => usePopularMovies(), {
+      wrapper: createWrapper(),
+    });
+
+    await waitFor(() => !result.current.isLoading);
+    await waitFor(() => result.current.isSuccess);
+
+    result.current.fetchNextPage();
+
+    await waitFor(() => !result.current.isLoading);
+    await waitFor(() => result.current.isSuccess);
+
+    expect(mocks.Axios).toHaveBeenCalledWith({
+      url: '/api/movies/popular?page=2',
     });
   });
 });
