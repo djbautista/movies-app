@@ -1,7 +1,10 @@
 'use client';
 
-import { usePopularMovies } from '@/hooks/api/usePopularMovies';
+import Link from 'next/link';
+
 import { PosterImage } from '@/components/PosterImage';
+import { usePopularMovies } from '@/hooks/api/usePopularMovies';
+import { generateMovieSlug } from '@/utils';
 
 export default function Home() {
   const { popularMovies, lastMovieElementRef } = usePopularMovies();
@@ -10,18 +13,26 @@ export default function Home() {
     <div className="min-h-screen">
       <main>
         <div className="grid grid-cols-2">
-          {popularMovies.map((movie, index) => (
-            <PosterImage
-              key={`${index}_${movie.id}`}
-              movie={movie}
-              ref={
-                index === popularMovies.length - 1
-                  ? lastMovieElementRef
-                  : undefined
-              }
-              priority={index < 4}
-            />
-          ))}
+          {popularMovies.map(({ id, title, ...movie }, index) => {
+            const slug = generateMovieSlug({ id, title });
+            return (
+              <Link
+                key={`${index}-${slug}`}
+                href={`/${slug}`}
+                aria-label={title}
+              >
+                <PosterImage
+                  movie={{ id, title, ...movie }}
+                  ref={
+                    index === popularMovies.length - 1
+                      ? lastMovieElementRef
+                      : undefined
+                  }
+                  priority={index < 4}
+                />
+              </Link>
+            );
+          })}
         </div>
       </main>
     </div>
