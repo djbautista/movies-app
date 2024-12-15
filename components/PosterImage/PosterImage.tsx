@@ -28,7 +28,7 @@ export const PosterImage = React.forwardRef<HTMLImageElement, PosterImageProps>(
         width={500}
         height={750}
         sizes="(max-width: 768px) 50vw, 33vw"
-        src={`/movies/posterImages/w185${poster_path}`}
+        src={`/movies/posters/w185${poster_path}`}
         className={getPosterImageClassName({ className })}
         {...props}
       />
