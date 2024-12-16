@@ -27,13 +27,15 @@ export default function Movie({
 
   return (
     <div className="min-h-screen bg-white">
-      <Header backHref="/">Movie details</Header>
+      <Header backHref="/" className="sticky top-0">
+        Movie details
+      </Header>
       <main>
         {movieDetails ? (
           <>
-            <header className="bg-primary sticky top-0 p-6">
+            <div className="bg-primary p-4">
               <h2 className="text-xl font-medium text-white">{title}</h2>
-            </header>
+            </div>
             <div className="space-y-6 p-6">
               <div className="flex gap-4">
                 <PosterImage
