@@ -28,7 +28,7 @@ export default function Movie({
       <main>
         {movieDetails ? (
           <>
-            <div className="bg-[#746A64] p-6">
+            <div className="bg-primary p-6">
               <h1 className="text-xl font-medium text-white">{title}</h1>
             </div>
             <div className="space-y-6 p-6">
@@ -39,34 +39,33 @@ export default function Movie({
                 />
                 <div className="w-full">
                   <div className="text-xl">{year}</div>
-                  <div className="text-sm/semi-loose italic text-[#212121]">
+                  <div className="text-sm/semi-loose text-secondary italic">
                     {runtime} mins
                   </div>
                   <div className="mb-4 mt-6 text-sm font-bold">
                     {parsedVoteAverage}/10
                   </div>
-                  <button className="w-full rounded-sm bg-[#746A64] px-6 py-4 text-center font-medium text-white">
+                  <button className="bg-primary w-full rounded-sm px-6 py-4 text-center font-medium text-white">
                     Add to Favorite
                   </button>
                 </div>
               </div>
-              <p className="text-sm/semi-loose font-medium text-[#757575]">
+              <p className="text-sm/semi-loose text-neutral font-medium">
                 {overview}
               </p>
-
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm/semi-loose w-full font-medium text-[#757575]">
+                  <h3 className="text-sm/semi-loose text-neutral w-full font-medium">
                     TRAILERS
                   </h3>
-                  <hr className="mt-[3px] border-[#DEDEDE]" />
+                  <hr className="mt-[3px] border-neutral-300" />
                 </div>
                 <div className="space-y-4">
-                  <button className="flex w-full items-center gap-4 rounded-lg bg-[#F5F5F5]/5 p-4">
+                  <button className="flex w-full items-center gap-4 rounded-lg bg-neutral-100/5 p-4">
                     <PiPlayCircleThin className="h-6 w-6" />
                     <span className="text-gray-400">Play trailer 1</span>
                   </button>
-                  <button className="flex w-full items-center gap-4 rounded-lg bg-[#F5F5F5]/5 p-4">
+                  <button className="flex w-full items-center gap-4 rounded-lg bg-neutral-100/5 p-4">
                     <PiPlayCircleThin className="h-6 w-6" />
                     <span className="text-gray-400">Play trailer 2</span>
                   </button>

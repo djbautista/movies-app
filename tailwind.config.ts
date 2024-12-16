@@ -6,6 +6,23 @@ export default {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        primary: '#746A64',
+        secondary: '#212121',
+        neutral: {
+          500: '#757575',
+          300: '#DEDEDE',
+          100: '#F5F5F5',
+          50: '#FAFAFA',
+          DEFAULT: '#757575',
+        },
+      },
+      lineHeight: {
+        'semi-loose': '24px',
+      },
+    },
+  },
   plugins: [],
 } satisfies Config;
