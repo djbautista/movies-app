@@ -5,6 +5,7 @@ import { PiPlayCircleThin } from 'react-icons/pi';
 
 import { PosterImage } from '@/components/PosterImage';
 import { useMovieDetails } from '@/hooks/api';
+import { Button } from '@/components/Button';
 
 export default function Movie({
   params,
@@ -45,9 +46,7 @@ export default function Movie({
                   <div className="mb-4 mt-6 text-sm font-bold">
                     {parsedVoteAverage}/10
                   </div>
-                  <button className="bg-primary w-full rounded-sm px-6 py-4 text-center font-medium text-white">
-                    Add to Favorite
-                  </button>
+                  <Button className="text-center">Add to Favorite</Button>
                 </div>
               </div>
               <p className="text-sm/semi-loose text-neutral font-medium">
@@ -60,15 +59,21 @@ export default function Movie({
                   </h3>
                   <hr className="mt-[3px] border-neutral-300" />
                 </div>
-                <div className="space-y-4">
-                  <button className="flex w-full items-center gap-4 rounded-lg bg-neutral-100/5 p-4">
+                <div className="space-y-2">
+                  <Button
+                    className="flex items-center gap-4 p-4"
+                    variant="neutral"
+                  >
                     <PiPlayCircleThin className="h-6 w-6" />
                     <span className="text-gray-400">Play trailer 1</span>
-                  </button>
-                  <button className="flex w-full items-center gap-4 rounded-lg bg-neutral-100/5 p-4">
+                  </Button>
+                  <Button
+                    className="flex items-center gap-4 p-4"
+                    variant="neutral"
+                  >
                     <PiPlayCircleThin className="h-6 w-6" />
                     <span className="text-gray-400">Play trailer 2</span>
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
