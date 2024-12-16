@@ -21,7 +21,7 @@ export const getPosterImageClassName = ({
 export const PosterImage = React.forwardRef<HTMLDivElement, PosterImageProps>(
   ({ className, ...props }, ref) => {
     return (
-      <div ref={ref}>
+      <div ref={ref} className={className}>
         <ServerPosterImage
           className={getPosterImageClassName({ className })}
           {...props}
