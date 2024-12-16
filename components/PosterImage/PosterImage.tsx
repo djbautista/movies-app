@@ -1,12 +1,11 @@
-import React from 'react';
+'use client';
 
-import Image, { ImageProps } from 'next/image';
-import { Movie } from '@/models/Movie';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface PosterImageProps extends Partial<ImageProps> {
-  movie: Movie;
-}
+import { ServerPosterImage, ServerPosterImageProps } from './ServerPosterImage';
+
+type PosterImageProps = ServerPosterImageProps;
 
 export const getPosterImageClassName = ({
   className,
@@ -19,19 +18,15 @@ export const getPosterImageClassName = ({
   ]);
 };
 
-export const PosterImage = React.forwardRef<HTMLImageElement, PosterImageProps>(
-  ({ className, movie: { poster_path, title }, ...props }, ref) => {
+export const PosterImage = React.forwardRef<HTMLDivElement, PosterImageProps>(
+  ({ className, ...props }, ref) => {
     return (
-      <Image
-        ref={ref}
-        alt={title}
-        width={500}
-        height={750}
-        sizes="(max-width: 768px) 50vw, 33vw"
-        src={`/movies/posters/w185${poster_path}`}
-        className={getPosterImageClassName({ className })}
-        {...props}
-      />
+      <div ref={ref}>
+        <ServerPosterImage
+          className={getPosterImageClassName({ className })}
+          {...props}
+        />
+      </div>
     );
   },
 );

@@ -1,17 +1,19 @@
+import { twMerge } from 'tailwind-merge';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
-import { PosterImage, getPosterImageClassName } from './PosterImage';
-import { twMerge } from 'tailwind-merge';
+import { getPosterImageClassName, PosterImage } from './PosterImage';
 
 const mocks = vi.hoisted(() => ({
-  Image: vi.fn((props) => <img {...props} data-testid="image" />),
+  ServerPosterImage: vi.fn(({ movie, ...props }) => (
+    <img {...props} data-movie={JSON.stringify(movie)} data-testid="image" />
+  )),
 }));
 
-vi.mock('next/image', async (actual) => ({
+vi.mock('./ServerPosterImage', async (actual) => ({
   ...((await actual()) as any),
-  default: mocks.Image,
+  ServerPosterImage: mocks.ServerPosterImage,
 }));
 
 describe('PosterImage', () => {
@@ -24,10 +26,9 @@ describe('PosterImage', () => {
     alt: mockMovie.title,
     width: '500',
     height: '750',
-    src: `/movies/posters/w185${mockMovie.poster_path}`,
-    className:
-      'box-border aspect-[2/3] w-full border border-black object-cover',
-    sizes: '(max-width: 768px) 50vw, 33vw',
+    src: `/movies/posters/w300${mockMovie.poster_path}`,
+    className: 'test-class',
+    sizes: '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw',
   };
 
   beforeEach(() => {
@@ -40,18 +41,10 @@ describe('PosterImage', () => {
     const imgElement = getByTestId('image');
 
     expect(imgElement).toBeInTheDocument();
-    expect(imgElement).toHaveAttribute('alt', defaultProps.alt);
-    expect(imgElement).toHaveAttribute('src', defaultProps.src);
-  });
 
-  test('Has the right width and height props', () => {
-    render(<PosterImage movie={mockMovie as any} />);
+    const movieData = JSON.parse(imgElement.getAttribute('data-movie')!);
 
-    const image = screen.getByTestId('image');
-
-    expect(image).toHaveAttribute('width', defaultProps.width);
-    expect(image).toHaveAttribute('height', defaultProps.height);
-    expect(image).toHaveAttribute('sizes', defaultProps.sizes);
+    expect(movieData).toEqual(mockMovie);
   });
 
   test('Has the proper classnames', () => {
