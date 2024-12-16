@@ -24,7 +24,7 @@ describe('PosterImage', () => {
     alt: mockMovie.title,
     width: '500',
     height: '750',
-    src: `/movies/posterImages/w185${mockMovie.poster_path}`,
+    src: `/movies/posters/w185${mockMovie.poster_path}`,
     className:
       'box-border aspect-[2/3] w-full border border-black object-cover',
     sizes: '(max-width: 768px) 50vw, 33vw',
