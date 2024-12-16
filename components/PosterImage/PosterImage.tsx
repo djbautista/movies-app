@@ -36,4 +36,6 @@ export const PosterImage = React.forwardRef<HTMLImageElement, PosterImageProps>(
   },
 );
 
+PosterImage.displayName = 'PosterImage';
+
 export default PosterImage;
