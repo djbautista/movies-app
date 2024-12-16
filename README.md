@@ -4,7 +4,7 @@ Welcome to Pop Movies, a web app that showcases the latest in cinema. This proje
 
 ## 🚀 Live Demo
 
-Check out the live demo [🍿 here](movies-app-eight-rho.vercel.app) and explore the world of cinema!
+Check out the live demo [🍿 here](https://movies-app-eight-rho.vercel.app/) and explore the world of cinema!
 
 ## 🎥 Features
 
