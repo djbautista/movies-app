@@ -5,6 +5,7 @@ import { PiPlayCircleThin } from 'react-icons/pi';
 
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
+import { Loading } from '@/components/Loading';
 import { PosterImage } from '@/components/PosterImage';
 import { useMovieDetails } from '@/hooks/api';
 
@@ -83,7 +84,9 @@ export default function Movie({
             </div>
           </>
         ) : (
-          <div>Loading...</div>
+          <div className="fixed top-0 flex min-h-screen w-full items-center justify-center">
+            <Loading className="border-neutral-900" />
+          </div>
         )}
       </main>
     </div>

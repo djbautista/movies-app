@@ -45,6 +45,10 @@ vi.mock('@/components/Header', () => ({
   Header: mocks.Header,
 }));
 
+vi.mock('@/components/Loading', () => ({
+  Loading: () => <div>Loading...</div>,
+}));
+
 vi.mock('@/components/PosterImage', () => ({
   PosterImage: React.forwardRef((props, ref) => mocks.PosterImage(props, ref)),
 }));

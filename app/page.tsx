@@ -3,12 +3,13 @@
 import Link from 'next/link';
 
 import { Header } from '@/components/Header';
+import { Loading } from '@/components/Loading';
 import { PosterImage } from '@/components/PosterImage';
 import { usePopularMovies } from '@/hooks/api/usePopularMovies';
 import { generateMovieSlug } from '@/utils';
 
 export default function Home() {
-  const { popularMovies, lastMovieElementRef } = usePopularMovies();
+  const { popularMovies, lastMovieElementRef, isLoading } = usePopularMovies();
 
   return (
     <div className="min-h-screen">
@@ -36,6 +37,11 @@ export default function Home() {
             );
           })}
         </div>
+        {isLoading && (
+          <div className="flex w-full justify-center p-4">
+            <Loading />
+          </div>
+        )}
       </main>
     </div>
   );
