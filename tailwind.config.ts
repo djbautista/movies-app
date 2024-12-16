@@ -17,6 +17,7 @@ export default {
         },
         secondary: '#212121',
         neutral: {
+          900: '#212121',
           500: '#757575',
           300: '#DEDEDE',
           100: '#F5F5F5',

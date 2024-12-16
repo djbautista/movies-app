@@ -29,6 +29,14 @@ describe('Button', () => {
       'transition-colors',
       'duration-200',
     ],
+    ghost: [
+      'bg-transparent',
+      'text-primary',
+      'hover:bg-primary-50',
+      'active:bg-primary-100',
+      'transition-colors',
+      'duration-200',
+    ],
   };
 
   it('renders Button component with the default props', () => {
@@ -45,7 +53,7 @@ describe('Button', () => {
     expect(button.className).toBe(generatedClasses);
   });
 
-  it.each(['primary', 'neutral'] as Variant[])(
+  it.each(['primary', 'neutral', 'ghost'] as Variant[])(
     `renders Button component with %s variant`,
     (variant) => {
       const expectedClasses = [

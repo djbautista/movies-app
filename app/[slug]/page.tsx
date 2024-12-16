@@ -3,9 +3,10 @@
 import { use } from 'react';
 import { PiPlayCircleThin } from 'react-icons/pi';
 
+import { Button } from '@/components/Button';
+import { Header } from '@/components/Header';
 import { PosterImage } from '@/components/PosterImage';
 import { useMovieDetails } from '@/hooks/api';
-import { Button } from '@/components/Button';
 
 export default function Movie({
   params,
@@ -26,12 +27,13 @@ export default function Movie({
 
   return (
     <div className="min-h-screen bg-white">
+      <Header backHref="/">Movie details</Header>
       <main>
         {movieDetails ? (
           <>
-            <div className="bg-primary p-6">
-              <h1 className="text-xl font-medium text-white">{title}</h1>
-            </div>
+            <header className="bg-primary sticky top-0 p-6">
+              <h2 className="text-xl font-medium text-white">{title}</h2>
+            </header>
             <div className="space-y-6 p-6">
               <div className="flex gap-4">
                 <PosterImage

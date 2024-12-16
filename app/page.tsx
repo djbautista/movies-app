@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 
+import { Header } from '@/components/Header';
 import { PosterImage } from '@/components/PosterImage';
 import { usePopularMovies } from '@/hooks/api/usePopularMovies';
 import { generateMovieSlug } from '@/utils';
@@ -11,6 +12,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <Header className="sticky top-0">Pop Movies</Header>
       <main>
         <div className="grid grid-cols-2">
           {popularMovies.map(({ id, title, ...movie }, index) => {

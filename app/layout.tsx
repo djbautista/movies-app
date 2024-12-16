@@ -24,7 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={twMerge('bg-black', 'antialiased', robotoSans.className)}
+        className={twMerge(
+          'bg-neutral-900',
+          'antialiased',
+          robotoSans.className,
+        )}
       >
         <Providers>{children}</Providers>
       </body>

@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 
-export type Variant = 'primary' | 'neutral';
+export type Variant = 'primary' | 'neutral' | 'ghost';
 
 const variants: Record<Variant, string[]> = {
   primary: [
@@ -16,6 +16,14 @@ const variants: Record<Variant, string[]> = {
     'text-neutral',
     'hover:bg-neutral-100',
     'active:bg-neutral-200',
+    'transition-colors',
+    'duration-200',
+  ],
+  ghost: [
+    'bg-transparent',
+    'text-primary',
+    'hover:bg-primary-50',
+    'active:bg-primary-100',
     'transition-colors',
     'duration-200',
   ],
