@@ -23,6 +23,17 @@ Technologies used in this project include:
 - **Tailwind CSS**: To optimize styling and CSS bundle size.
   - Note: The use of Tailwind CSS was a deliberate decision to ensure a maintainable and scalable codebase while achieving pixel-perfect designs per the provided Figma specs.
 
+## ⚙️ Architecture Overview
+
+I've chosen a client-server architecture to ensure a secure and efficient user experience. Here's a high-level overview of the architecture:
+
+1. **Clients**: Users interact with the app from their devices.
+2. **React (UI)**: Renders the UI and handles user interactions.
+3. **Node.js (UI)**: Hosted on Vercel to serve the React UI and manage requests, while injects secure auth tokens for TMDB API requests securely in the server side as a middleware API handler.
+4. **TMDB API**: Provides movie data such as trending movies, their details, and optimized movie images.
+
+   ![Architecture Diagram](./docs/architecture.png)
+
 ## 🎬 Getting Started
 
 ### Prerequisites
