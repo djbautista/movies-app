@@ -1,0 +1,15 @@
+@import '@/app/variables.module.scss';
+
+.loading {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border-top: 2px solid $color-blue;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}

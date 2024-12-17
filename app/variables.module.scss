@@ -4,6 +4,7 @@ $color-black: #000000;
 $color-sand: #757575;
 $color-desert: #746a64;
 $color-gray: #212121;
+$color-blue: #3b82f6;
 
 $color-primary: $color-desert;
 $color-secondary: $color-sand;
@@ -20,11 +21,12 @@ $font-sans: var(--font-sans), sans-serif;
 $breakpoint-sm: 667px;
 
 :export {
-  color-white: $color-white;
-  color-black: $color-black;
-  color-sand: $color-sand;
-  color-desert: $color-desert;
-  color-gray: $color-gray;
+  colorWhite: $color-white;
+  colorBlack: $color-black;
+  colorSand: $color-sand;
+  colorDesert: $color-desert;
+  colorGray: $color-gray;
+  colorBlue: $color-blue;
 
   colorPrimary: $color-primary;
   colorSecondary: $color-secondary;
