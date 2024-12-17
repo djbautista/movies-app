@@ -1,9 +1,8 @@
-import { twMerge } from 'tailwind-merge';
 import { beforeEach, describe, expect, it } from 'vitest';
-
 import { cleanup, render, screen } from '@testing-library/react';
 
-import Header, { getHeaderClassName, HeaderProps } from './Header';
+import Header, { HeaderProps } from './Header';
+import styles from './header.module.scss';
 
 const setup = (props: HeaderProps = {}) =>
   render(<Header {...props} data-testid="header" />);
@@ -11,41 +10,22 @@ const setup = (props: HeaderProps = {}) =>
 describe('Header', () => {
   beforeEach(cleanup);
 
-  const baseClassNames = [
-    'flex',
-    'items-center',
-    'justify-between',
-    'bg-neutral-900',
-    'px-[18px] py-5',
-    'text-white',
-  ];
-
   it('renders Header component with the default props', () => {
-    const expectedClasses = [...baseClassNames];
-
     setup();
     const header = screen.getByTestId('header');
-    const generatedClasses = getHeaderClassName();
-
-    expect(generatedClasses).toBe(twMerge(expectedClasses));
-    expect(header.className).toBe(generatedClasses);
+    expect(header).toHaveClass(styles.header);
   });
 
   it('renders Header component with custom className', () => {
     const customClassName = 'custom-class';
-    const expectedClasses = [...baseClassNames, customClassName];
-
     setup({ className: customClassName });
-    const header = screen.getByTestId('header');
-    const generatedClasses = getHeaderClassName({ className: customClassName });
 
-    expect(generatedClasses).toBe(twMerge(expectedClasses));
-    expect(header.className).toBe(generatedClasses);
+    const header = screen.getByTestId('header');
+    expect(header).toHaveClass(styles.header, customClassName);
   });
 
   it('does not display back button when backHref is not provided', () => {
     setup();
-
     const backLink = screen.queryByRole('link');
     expect(backLink).not.toBeInTheDocument();
   });
@@ -55,8 +35,8 @@ describe('Header', () => {
 
     const backLink = screen.getByRole('link');
     expect(backLink).toBeInTheDocument();
-
     expect(backLink).toHaveAttribute('href', '/back');
+    expect(backLink).toHaveClass(styles['header__backLink']);
   });
 
   it('renders children as header title', () => {
@@ -65,5 +45,6 @@ describe('Header', () => {
 
     const headerTitle = screen.getByText(title);
     expect(headerTitle).toBeInTheDocument();
+    expect(headerTitle).toHaveClass(styles['header__title']);
   });
 });
