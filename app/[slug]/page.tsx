@@ -8,6 +8,7 @@ import { Header } from '@/components/Header';
 import { Loading } from '@/components/Loading';
 import { PosterImage } from '@/components/PosterImage';
 import { useMovieDetails } from '@/hooks/api';
+import { useFavoriteMovie } from '@/hooks/useFavoriteMovie';
 
 export default function Movie({
   params,
@@ -15,7 +16,6 @@ export default function Movie({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-
   const id = slug.split('-')[0];
 
   const { movieDetails } = useMovieDetails({ id });
@@ -25,6 +25,12 @@ export default function Movie({
 
   const [year] = release_date?.split('-') || [];
   const parsedVoteAverage = vote_average ? vote_average.toFixed(1) : '';
+
+  const {
+    isFavorite,
+    isLoading: isFavoriteLoading,
+    toggleFavorite,
+  } = useFavoriteMovie({ id });
 
   return (
     <div className="min-h-screen bg-white">
@@ -45,21 +51,27 @@ export default function Movie({
                 />
                 <div className="w-full">
                   <div className="text-xl">{year}</div>
-                  <div className="text-sm/semi-loose text-secondary italic">
+                  <div className="text-sm/semi-loose italic text-secondary">
                     {runtime} mins
                   </div>
                   <div className="mb-4 mt-6 text-sm font-bold">
                     {parsedVoteAverage}/10
                   </div>
-                  <Button className="text-center">Add to Favorite</Button>
+                  {!isFavoriteLoading ? (
+                    <Button className="text-center" onClick={toggleFavorite}>
+                      {isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
+                    </Button>
+                  ) : (
+                    <div>Loading favorites...</div>
+                  )}
                 </div>
               </div>
-              <p className="text-sm/semi-loose text-neutral font-medium">
+              <p className="text-sm/semi-loose font-medium text-neutral">
                 {overview}
               </p>
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm/semi-loose text-neutral w-full font-medium">
+                  <h3 className="w-full text-sm/semi-loose font-medium text-neutral">
                     TRAILERS
                   </h3>
                   <hr className="mt-[3px] border-neutral-300" />
