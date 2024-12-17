@@ -1,0 +1,38 @@
+@import '@/app/variables.module.scss';
+
+@mixin button-interactions($base-color) {
+  &:hover {
+    background-color: rgba($base-color, 0.9);
+  }
+
+  &:active {
+    background-color: rgba($base-color, 0.8);
+  }
+}
+
+.button {
+  width: 100%;
+  border-radius: 2px;
+  padding: 1rem 1.5rem;
+  font-weight: 500;
+  white-space: nowrap;
+
+  &--primary {
+    background-color: $color-primary;
+    color: $color-white;
+
+    @include button-interactions($color-primary);
+  }
+
+  &--neutral {
+    background-color: $color-neutral;
+    color: $color-neutral;
+
+    @include button-interactions($color-neutral);
+  }
+
+  &--ghost {
+    background-color: transparent;
+    color: $color-primary;
+  }
+}
