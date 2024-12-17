@@ -1,0 +1,40 @@
+$color-white: #ffffff;
+$color-neutral: #fafafa;
+$color-black: #000000;
+$color-sand: #757575;
+$color-desert: #746a64;
+$color-gray: #212121;
+
+$color-primary: $color-desert;
+$color-secondary: $color-sand;
+$color-neutral: $color-neutral;
+
+$text-color-primary: $color-black;
+$text-color-secondary: $color-sand;
+
+$background-color: $color-white;
+$background-color-alt: $color-gray;
+
+$font-sans: var(--font-sans), sans-serif;
+
+$breakpoint-sm: 667px;
+
+:export {
+  color-white: $color-white;
+  color-black: $color-black;
+  color-sand: $color-sand;
+  color-desert: $color-desert;
+  color-gray: $color-gray;
+
+  colorPrimary: $color-primary;
+  colorSecondary: $color-secondary;
+  colorNeutral: $color-neutral;
+
+  textColorPrimary: $text-color-primary;
+  textColorSecondary: $text-color-secondary;
+
+  backgroundColor: $background-color;
+  backgroundColorAlt: $background-color-alt;
+
+  fontSans: $font-sans;
+}
