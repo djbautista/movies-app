@@ -1,5 +1,4 @@
 import Image, { ImageProps } from 'next/image';
-
 import { Movie } from '@/models/Movie';
 
 export interface ServerPosterImageProps extends Partial<ImageProps> {

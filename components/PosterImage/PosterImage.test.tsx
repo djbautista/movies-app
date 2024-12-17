@@ -1,9 +1,8 @@
-import { twMerge } from 'tailwind-merge';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-
 import { cleanup, render, screen } from '@testing-library/react';
 
-import { getPosterImageClassName, PosterImage } from './PosterImage';
+import { PosterImage } from './PosterImage';
+import styles from './posterImage.module.scss';
 
 const mocks = vi.hoisted(() => ({
   ServerPosterImage: vi.fn(({ movie, ...props }) => (
@@ -22,15 +21,6 @@ describe('PosterImage', () => {
     title: 'Mock Movie',
   };
 
-  const defaultProps = {
-    alt: mockMovie.title,
-    width: '500',
-    height: '750',
-    src: `/movies/posters/w300${mockMovie.poster_path}`,
-    className: 'test-class',
-    sizes: '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw',
-  };
-
   beforeEach(() => {
     cleanup();
     vi.clearAllMocks();
@@ -45,24 +35,5 @@ describe('PosterImage', () => {
     const movieData = JSON.parse(imgElement.getAttribute('data-movie')!);
 
     expect(movieData).toEqual(mockMovie);
-  });
-
-  test('Has the proper classnames', () => {
-    const expectedClasses = [
-      'aspect-[2/3] w-full',
-      'object-cover',
-      'box-border border border-black',
-      'custom-class',
-    ];
-
-    render(<PosterImage movie={mockMovie as any} className="custom-class" />);
-
-    const image = screen.getByTestId('image');
-    const generatedClasses = getPosterImageClassName({
-      className: 'custom-class',
-    });
-
-    expect(generatedClasses).toBe(twMerge(expectedClasses));
-    expect(image.className).toBe(generatedClasses);
   });
 });
