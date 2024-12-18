@@ -1,8 +1,8 @@
-@use '@/app/variables.module.scss' as vars;
+@import '@/app/variables.module.scss';
 
 .page {
   min-height: 100vh;
-  background-color: vars.$color-white;
+  background-color: $color-white;
 
   &__header {
     position: sticky;
@@ -11,13 +11,13 @@
   }
 
   &__title-section {
-    background-color: vars.$color-primary;
+    background-color: $color-primary;
     padding: 1rem;
 
     h2 {
       font-size: 1.25rem;
       font-weight: 500;
-      color: vars.$color-white;
+      color: $color-white;
     }
   }
 
@@ -54,7 +54,7 @@
     font-size: 0.875rem;
     font-style: italic;
     line-height: 1.4;
-    color: vars.$color-secondary;
+    color: $color-secondary;
   }
 
   &__rating {
@@ -72,7 +72,7 @@
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.4;
-    color: vars.$text-color-secondary;
+    color: $text-color-secondary;
   }
 
   &__trailers {
@@ -92,7 +92,7 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: vars.$color-neutral;
+    background: $color-neutral;
   }
 
   &__icon {
@@ -101,7 +101,7 @@
   }
 
   &__text {
-    color: vars.$text-color-secondary;
+    color: $text-color-secondary;
   }
 
   &__loading-container {
@@ -115,6 +115,6 @@
   }
 
   &__border-neutral {
-    border-color: vars.$color-gray;
+    border-color: $color-gray;
   }
 }

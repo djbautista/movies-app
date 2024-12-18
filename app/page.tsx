@@ -1,21 +1,24 @@
 'use client';
 
 import Link from 'next/link';
-
 import { Header } from '@/components/Header';
 import { Loading } from '@/components/Loading';
 import { PosterImage } from '@/components/PosterImage';
 import { usePopularMovies } from '@/hooks/api/usePopularMovies';
 import { generateMovieSlug } from '@/utils';
 
-export default function Home() {
+import styles from './page.module.scss';
+
+export default function HomePage() {
   const { popularMovies, lastMovieElementRef, isLoading } = usePopularMovies();
 
   return (
-    <div className="min-h-screen">
-      <Header className="sticky top-0">Pop Movies</Header>
-      <main>
-        <div className="grid grid-cols-2">
+    <div className={styles.page}>
+      <Header backHref="/" className={styles.page__header}>
+        Pop Movies
+      </Header>
+      <main className={styles.page__main}>
+        <div className={styles.page__grid}>
           {popularMovies.map(({ id, title, ...movie }, index) => {
             const slug = generateMovieSlug({ id, title });
             return (
@@ -23,6 +26,7 @@ export default function Home() {
                 key={`${index}-${slug}`}
                 href={`/${slug}`}
                 aria-label={title}
+                className={styles.page__link}
               >
                 <PosterImage
                   movie={{ id, title, ...movie }}
@@ -32,14 +36,15 @@ export default function Home() {
                       : undefined
                   }
                   priority={index < 4}
+                  className={styles.page__poster}
                 />
               </Link>
             );
           })}
         </div>
         {isLoading && (
-          <div className="flex w-full justify-center p-4">
-            <Loading />
+          <div className={styles.page__loadingContainer}>
+            <Loading className={styles.page__loading} />
           </div>
         )}
       </main>

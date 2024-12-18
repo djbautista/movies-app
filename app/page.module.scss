@@ -1,0 +1,32 @@
+@import '@/app/variables.module.scss';
+
+.page {
+  min-height: 100vh;
+  background-color: $background-color-alt;
+
+  &__header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+
+  &__loadingContainer {
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+}
