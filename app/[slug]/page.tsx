@@ -1,6 +1,7 @@
 'use client';
 
 import { use } from 'react';
+import clsx from 'clsx';
 import { PiPlayCircleThin } from 'react-icons/pi';
 
 import { Button } from '@/components/Button';
@@ -9,6 +10,8 @@ import { Loading } from '@/components/Loading';
 import { PosterImage } from '@/components/PosterImage';
 import { useMovieDetails } from '@/hooks/api';
 import { useFavoriteMovie } from '@/hooks/useFavoriteMovie';
+
+import styles from './page.module.scss';
 
 export default function Movie({
   params,
@@ -33,32 +36,31 @@ export default function Movie({
   } = useFavoriteMovie({ id });
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header backHref="/" className="sticky top-0">
+    <div className={styles['page']}>
+      <Header backHref="/" className={styles['page__header']}>
         Movie details
       </Header>
       <main>
         {movieDetails ? (
           <>
-            <div className="bg-primary p-4">
-              <h2 className="text-xl font-medium text-white">{title}</h2>
+            <div className={styles['page__title-section']}>
+              <h2>{title}</h2>
             </div>
-            <div className="space-y-6 p-6">
-              <div className="flex gap-4">
+            <div className={styles['page__content']}>
+              <div className={styles['page__content__details']}>
                 <PosterImage
                   movie={movieDetails}
-                  className="box-content max-h-[170px] w-[115px] flex-shrink-0 rounded-sm border-none"
+                  className={clsx(styles['page__content__details__poster'])}
                 />
-                <div className="w-full">
-                  <div className="text-xl">{year}</div>
-                  <div className="text-sm/semi-loose italic text-secondary">
-                    {runtime} mins
-                  </div>
-                  <div className="mb-4 mt-6 text-sm font-bold">
-                    {parsedVoteAverage}/10
-                  </div>
+                <div className={styles['page__content__details__info']}>
+                  <div className={styles.year}>{year}</div>
+                  <div className={styles.runtime}>{runtime} mins</div>
+                  <div className={styles.rating}>{parsedVoteAverage}/10</div>
                   {!isFavoriteLoading ? (
-                    <Button className="text-center" onClick={toggleFavorite}>
+                    <Button
+                      className={styles['page__content__details__info__button']}
+                      onClick={toggleFavorite}
+                    >
                       {isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
                     </Button>
                   ) : (
@@ -66,38 +68,34 @@ export default function Movie({
                   )}
                 </div>
               </div>
-              <p className="text-sm/semi-loose font-medium text-neutral">
-                {overview}
-              </p>
-              <div className="space-y-4">
+              <p className={styles['page__content__overview']}>{overview}</p>
+              <div className={styles['page__content__trailers']}>
                 <div>
-                  <h3 className="w-full text-sm/semi-loose font-medium text-neutral">
-                    TRAILERS
-                  </h3>
-                  <hr className="mt-[3px] border-neutral-300" />
+                  <h3>TRAILERS</h3>
+                  <hr />
                 </div>
-                <div className="space-y-2">
+                <div className={styles['page__content__trailers__list']}>
                   <Button
-                    className="flex items-center gap-4 p-4"
+                    className={styles['page__content__trailers__list__button']}
                     variant="neutral"
                   >
-                    <PiPlayCircleThin className="h-6 w-6" />
-                    <span className="text-gray-400">Play trailer 1</span>
+                    <PiPlayCircleThin className={styles.icon} />
+                    <span className={styles.text}>Play trailer 1</span>
                   </Button>
                   <Button
-                    className="flex items-center gap-4 p-4"
+                    className={styles['page__content__trailers__list__button']}
                     variant="neutral"
                   >
-                    <PiPlayCircleThin className="h-6 w-6" />
-                    <span className="text-gray-400">Play trailer 2</span>
+                    <PiPlayCircleThin className={styles.icon} />
+                    <span className={styles.text}>Play trailer 2</span>
                   </Button>
                 </div>
               </div>
             </div>
           </>
         ) : (
-          <div className="fixed top-0 flex min-h-screen w-full items-center justify-center">
-            <Loading className="border-neutral-900" />
+          <div className={styles['page__loading-container']}>
+            <Loading className={styles['border-neutral-900']} />
           </div>
         )}
       </main>

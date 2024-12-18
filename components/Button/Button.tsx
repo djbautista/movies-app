@@ -14,6 +14,7 @@ export const Button = ({
   variant = 'primary',
   ...props
 }: ButtonProps) => {
+  console.log({ className });
   return (
     <button
       {...props}

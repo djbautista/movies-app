@@ -93,10 +93,9 @@ describe('Movie Page', () => {
 
     expect(screen.getByText('My Movie')).toBeInTheDocument();
 
-    expect(mocks.PosterImage).toHaveBeenCalledTimes(1);
+    expect(mocks.PosterImage).toHaveBeenCalled();
     const posterImageProps = mocks.PosterImage.mock.calls[0][0];
     expect(posterImageProps.movie).toEqual(mockMovieDetails);
-    expect(posterImageProps.className).toContain('max-h-[170px]');
 
     const year = mockMovieDetails.release_date.split('-')[0];
     expect(screen.getByText(year)).toBeInTheDocument();

@@ -4,6 +4,7 @@ $color-black: #000000;
 $color-sand: #757575;
 $color-desert: #746a64;
 $color-gray: #212121;
+$color-light-gray: #dedede;
 $color-blue: #3b82f6;
 
 $color-primary: $color-desert;
@@ -26,6 +27,7 @@ $breakpoint-sm: 667px;
   colorSand: $color-sand;
   colorDesert: $color-desert;
   colorGray: $color-gray;
+  colorLightGray: $color-light-gray;
   colorBlue: $color-blue;
 
   colorPrimary: $color-primary;
