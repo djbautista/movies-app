@@ -11,8 +11,8 @@ export type PosterImageProps = ServerPosterImageProps;
 export const PosterImage = React.forwardRef<HTMLDivElement, PosterImageProps>(
   ({ className, ...props }, ref) => {
     return (
-      <div ref={ref} className={clsx(styles['poster-image'], className)}>
-        <ServerPosterImage className={clsx(styles['poster-image'], className)} {...props} />
+      <div ref={ref} className={clsx(styles.posterImage, className)}>
+        <ServerPosterImage className={clsx(styles['posterImage__img'], className)} {...props} />
       </div>
     );
   },
