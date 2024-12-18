@@ -21,8 +21,8 @@ describe('ServerPosterImage', () => {
 
   const defaultProps = {
     alt: mockMovie.title,
-    width: '500',
-    height: '750',
+    width: '200',
+    height: '300',
     src: `/movies/posters/w300${mockMovie.poster_path}`,
     sizes: '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw',
   };

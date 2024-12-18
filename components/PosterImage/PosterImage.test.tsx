@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 
 import { PosterImage } from './PosterImage';
-import styles from './posterImage.module.scss';
 
 const mocks = vi.hoisted(() => ({
   ServerPosterImage: vi.fn(({ movie, ...props }) => (
