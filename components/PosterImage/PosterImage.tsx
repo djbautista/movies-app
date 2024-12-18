@@ -12,7 +12,7 @@ export const PosterImage = React.forwardRef<HTMLDivElement, PosterImageProps>(
   ({ className, ...props }, ref) => {
     return (
       <div ref={ref} className={clsx(styles['poster-image'], className)}>
-        <ServerPosterImage className={styles['poster-image__img']} {...props} />
+        <ServerPosterImage className={clsx(styles['poster-image'], className)} {...props} />
       </div>
     );
   },
