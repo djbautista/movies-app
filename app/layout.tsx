@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
-import { twMerge } from 'tailwind-merge';
 
 import { Providers } from '@/components/Providers';
 
-import './globals.css';
+import './globals.scss';
 
 const robotoSans = Roboto({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
+  variable: '--font-sans',
 });
 
 export const metadata: Metadata = {
@@ -23,13 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={twMerge(
-          'bg-neutral-900',
-          'antialiased',
-          robotoSans.className,
-        )}
-      >
+      <body className={robotoSans.variable}>
         <Providers>{children}</Providers>
       </body>
     </html>

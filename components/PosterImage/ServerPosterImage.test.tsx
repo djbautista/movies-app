@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 
 import { ServerPosterImage } from './ServerPosterImage';
-import { twMerge } from 'tailwind-merge';
 
 const mocks = vi.hoisted(() => ({
   Image: vi.fn((props) => <img {...props} data-testid="image" />),

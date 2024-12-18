@@ -20,8 +20,6 @@ Technologies used in this project include:
 - **Next.js (App Router)**: To protect third-party API tokens in a server-side middle API handler.
 - **React Query**: Manages data fetching and caching for an optimal user experience.
 - **Vitest**: Handles fast, efficient, and simplier setup, for unit testing.
-- **Tailwind CSS**: To optimize styling and CSS bundle size.
-  - Note: The use of Tailwind CSS was a deliberate decision to ensure a maintainable and scalable codebase while achieving pixel-perfect designs per the provided Figma specs.
 
 ## ⚙️ Architecture Overview
 

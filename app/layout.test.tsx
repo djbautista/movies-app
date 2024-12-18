@@ -11,7 +11,6 @@ const mocks = vi.hoisted(() => ({
   Roboto: vi.fn(() => ({
     className: 'roboto-mock-classname',
   })),
-  twMerge: vi.fn((...classes: string[]) => classes.filter(Boolean).join(' ')),
 }));
 
 vi.mock('@/components/Providers', () => ({
@@ -20,10 +19,6 @@ vi.mock('@/components/Providers', () => ({
 
 vi.mock('next/font/google', () => ({
   Roboto: mocks.Roboto,
-}));
-
-vi.mock('tailwind-merge', () => ({
-  twMerge: mocks.twMerge,
 }));
 
 describe('Layout', () => {
@@ -45,21 +40,12 @@ describe('Layout', () => {
     expect(screen.getByTestId('child')).toBeInTheDocument();
     expect(screen.getByTestId('child')).toHaveTextContent('Hello');
 
-    expect(mocks.twMerge).toHaveBeenCalledWith(
-      'bg-neutral-900',
-      'antialiased',
-      'roboto-mock-classname',
-    );
-
     const htmlElement = document.querySelector('html');
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveAttribute('lang', 'en');
 
     const bodyElement = document.querySelector('body');
     expect(bodyElement).toBeInTheDocument();
-    expect(bodyElement?.className).toBe(
-      'bg-neutral-900 antialiased roboto-mock-classname',
-    );
   });
 
   it('has the correct metadata', () => {

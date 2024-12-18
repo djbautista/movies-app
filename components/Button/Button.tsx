@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+
 import styles from './button.module.scss';
 
 export type Variant = 'primary' | 'neutral' | 'ghost';
@@ -14,7 +15,6 @@ export const Button = ({
   variant = 'primary',
   ...props
 }: ButtonProps) => {
-  console.log({ className });
   return (
     <button
       {...props}
