@@ -14,9 +14,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.page}>
-      <Header backHref="/" className={styles.page__header}>
-        Pop Movies
-      </Header>
+      <Header className={styles.page__header}>Pop Movies</Header>
       <main className={styles.page__main}>
         <div className={styles.page__grid}>
           {popularMovies.map(({ id, title, ...movie }, index) => {
