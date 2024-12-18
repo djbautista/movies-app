@@ -1,7 +1,6 @@
 'use client';
 
 import { use } from 'react';
-import clsx from 'clsx';
 import { PiPlayCircleThin } from 'react-icons/pi';
 
 import { Button } from '@/components/Button';
@@ -36,7 +35,7 @@ export default function Movie({
   } = useFavoriteMovie({ id });
 
   return (
-    <div className={styles['page']}>
+    <div className={styles.page}>
       <Header backHref="/" className={styles['page__header']}>
         Movie details
       </Header>
@@ -47,18 +46,20 @@ export default function Movie({
               <h2>{title}</h2>
             </div>
             <div className={styles['page__content']}>
-              <div className={styles['page__content__details']}>
+              <div className={styles['page__details']}>
                 <PosterImage
                   movie={movieDetails}
-                  className={clsx(styles['page__content__details__poster'])}
+                  className={styles['page__details-poster']}
                 />
-                <div className={styles['page__content__details__info']}>
-                  <div className={styles.year}>{year}</div>
-                  <div className={styles.runtime}>{runtime} mins</div>
-                  <div className={styles.rating}>{parsedVoteAverage}/10</div>
+                <div className={styles['page__details-info']}>
+                  <div className={styles['page__year']}>{year}</div>
+                  <div className={styles['page__runtime']}>{runtime} mins</div>
+                  <div className={styles['page__rating']}>
+                    {parsedVoteAverage}/10
+                  </div>
                   {!isFavoriteLoading ? (
                     <Button
-                      className={styles['page__content__details__info__button']}
+                      className={styles['page__button']}
                       onClick={toggleFavorite}
                     >
                       {isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
@@ -68,26 +69,26 @@ export default function Movie({
                   )}
                 </div>
               </div>
-              <p className={styles['page__content__overview']}>{overview}</p>
-              <div className={styles['page__content__trailers']}>
+              <p className={styles['page__overview']}>{overview}</p>
+              <div className={styles['page__trailers']}>
                 <div>
                   <h3>TRAILERS</h3>
                   <hr />
                 </div>
-                <div className={styles['page__content__trailers__list']}>
+                <div className={styles['page__trailers-list']}>
                   <Button
-                    className={styles['page__content__trailers__list__button']}
+                    className={styles['page__trailers-button']}
                     variant="neutral"
                   >
-                    <PiPlayCircleThin className={styles.icon} />
-                    <span className={styles.text}>Play trailer 1</span>
+                    <PiPlayCircleThin className={styles['page__icon']} />
+                    <span className={styles['page__text']}>Play trailer 1</span>
                   </Button>
                   <Button
-                    className={styles['page__content__trailers__list__button']}
+                    className={styles['page__trailers-button']}
                     variant="neutral"
                   >
-                    <PiPlayCircleThin className={styles.icon} />
-                    <span className={styles.text}>Play trailer 2</span>
+                    <PiPlayCircleThin className={styles['page__icon']} />
+                    <span className={styles['page__text']}>Play trailer 2</span>
                   </Button>
                 </div>
               </div>
@@ -95,7 +96,7 @@ export default function Movie({
           </>
         ) : (
           <div className={styles['page__loading-container']}>
-            <Loading className={styles['border-neutral-900']} />
+            <Loading className={styles['page__border-neutral']} />
           </div>
         )}
       </main>

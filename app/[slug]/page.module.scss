@@ -1,22 +1,23 @@
-@import '@/app/variables.module.scss';
+@use '@/app/variables.module.scss' as vars;
 
 .page {
-  min-height: 100vh; // min-h-screen
-  background-color: $color-white;
+  min-height: 100vh;
+  background-color: vars.$color-white;
 
   &__header {
     position: sticky;
     top: 0;
-    z-index: 10; // Ensure header stays on top if needed
+    z-index: 10;
   }
 
   &__title-section {
-    background-color: $color-primary;
+    background-color: vars.$color-primary;
     padding: 1rem;
+
     h2 {
       font-size: 1.25rem;
       font-weight: 500;
-      color: $color-white;
+      color: vars.$color-white;
     }
   }
 
@@ -25,98 +26,82 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+  }
 
-    &__details {
-      display: flex;
-      gap: 1rem; // gap-4
+  &__details {
+    display: flex;
+    gap: 1rem;
+  }
 
-      &__poster {
-        box-sizing: content-box; // box-content
-        max-height: 170px;
-        width: 115px;
-        flex-shrink: 0;
-        border-radius: 4px; // rounded-sm
-        border: none; // border-none
-      }
+  &__details-poster {
+    box-sizing: content-box;
+    max-height: 170px;
+    width: 115px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: none;
+  }
 
-      &__info {
-        width: 100%;
+  &__details-info {
+    width: 100%;
+  }
 
-        .year {
-          font-size: 1.25rem; // text-xl
-        }
+  &__year {
+    font-size: 1.25rem;
+  }
 
-        .runtime {
-          font-size: 0.875rem; // text-sm
-          font-style: italic;
-          line-height: 1.4; // "semi-loose" like
-          color: $color-secondary;
-        }
+  &__runtime {
+    font-size: 0.875rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: vars.$color-secondary;
+  }
 
-        .rating {
-          margin-top: 1.5rem; // mt-6 (~24px)
-          margin-bottom: 1rem; // mb-4 (~16px)
-          font-size: 0.875rem; // text-sm
-          font-weight: bold;
-        }
+  &__rating {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+  }
 
-        &__button {
-          text-align: center;
-        }
-      }
-    }
+  &__button {
+    text-align: center;
+  }
 
-    &__overview {
-      font-size: 0.875rem; // text-sm
-      font-weight: 500; // font-medium
-      line-height: 1.4; // semi-loose
-      color: $text-color-secondary;
-    }
+  &__overview {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: vars.$text-color-secondary;
+  }
 
-    &__trailers {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem; // space-y-4
+  &__trailers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-      h3 {
-        width: 100%;
-        font-size: 0.875rem; // text-sm
-        font-weight: 500; // medium
-        line-height: 1.4; // semi-loose
-        color: $color-neutral;
-      }
+  &__trailers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-      hr {
-        margin-top: 3px;
-        border: none;
-        border-top: 1px solid $color-light-gray;
-      }
+  &__trailers-button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: vars.$color-neutral;
+  }
 
-      &__list {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem; // space-y-2
+  &__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 
-        // "trailer-button" is applied via className in JSX
-        // We style it here:
-        &__button {
-          display: flex;
-          align-items: center;
-          gap: 1rem; // gap-4
-          padding: 1rem; // p-4
-          background: $color-neutral; // neutral variant may apply background, adjust as needed
-
-          .icon {
-            width: 1.5rem; // h-6 w-6
-            height: 1.5rem;
-          }
-
-          .text {
-            color: $text-color-secondary;
-          }
-        }
-      }
-    }
+  &__text {
+    color: vars.$text-color-secondary;
   }
 
   &__loading-container {
@@ -127,5 +112,9 @@
     width: 100%;
     align-items: center;
     justify-content: center;
+  }
+
+  &__border-neutral {
+    border-color: vars.$color-gray;
   }
 }
